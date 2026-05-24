@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Supermarket price tracker</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #fafaf8;
+        --fg: #1a1a1a;
+        --muted: #6b6b6b;
+        --border: #e3e3e0;
+        --accent: #2a6f4d;
+        --row-hover: #f0efeb;
+        --best: #2a6f4d;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #161614;
+          --fg: #ececec;
+          --muted: #9a9a9a;
+          --border: #2c2c2a;
+          --accent: #6fc097;
+          --row-hover: #1f1f1d;
+          --best: #6fc097;
+        }
+      }
+      * { box-sizing: border-box; }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background: var(--bg);
+        color: var(--fg);
+        margin: 0;
+        padding: 2rem 1rem 4rem;
+        line-height: 1.5;
+      }
+      main {
+        max-width: 640px;
+        margin: 0 auto;
+      }
+      header {
+        margin-bottom: 1.5rem;
+      }
+      h1 {
+        font-size: 1.5rem;
+        margin: 0 0 0.25rem;
+      }
+      .sub {
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+      .category {
+        border-top: 1px solid var(--border);
+      }
+      .category:last-child {
+        border-bottom: 1px solid var(--border);
+      }
+      .cat-header {
+        display: grid;
+        grid-template-columns: 1.2rem 1fr auto auto;
+        gap: 0.75rem;
+        align-items: baseline;
+        padding: 0.9rem 0.25rem;
+        cursor: pointer;
+        user-select: none;
+      }
+      .cat-header:hover {
+        background: var(--row-hover);
+      }
+      .chevron {
+        color: var(--muted);
+        font-size: 0.8rem;
+        transition: transform 0.15s ease;
+        display: inline-block;
+      }
+      .open .chevron {
+        transform: rotate(90deg);
+      }
+      .cat-name {
+        font-weight: 600;
+      }
+      .cat-best {
+        color: var(--best);
+        font-weight: 500;
+      }
+      .cat-total {
+        color: var(--muted);
+        font-variant-numeric: tabular-nums;
+        font-size: 0.9rem;
+      }
+      .stores {
+        display: none;
+        padding: 0 0.25rem 1rem 2rem;
+      }
+      .open .stores {
+        display: block;
+      }
+      .store-row {
+        display: grid;
+        grid-template-columns: 1.5rem 1fr auto;
+        gap: 0.75rem;
+        padding: 0.35rem 0;
+        font-size: 0.95rem;
+        font-variant-numeric: tabular-nums;
+      }
+      .store-row .rank {
+        color: var(--muted);
+        text-align: right;
+      }
+      .store-row.best .store-name {
+        color: var(--best);
+        font-weight: 600;
+      }
+      .error {
+        color: #c0392b;
+        padding: 1rem;
+        border: 1px solid #c0392b;
+        border-radius: 6px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>Supermarket price tracker</h1>
+        <div class="sub" id="sub"></div>
+      </header>
+      <div id="list"></div>
+    </main>
+    <script type="text/csv" id="prices">
+category,item,Alcampo,Mercadona,Dia,Consum,Bonpreu Esclat,Carrefour,Caprabo,Condis,Ametller Origen
+Seeds,Brown rice,2.26,1.74,1.95,1.91,2.34,2.29,2.47,1.80,2.08
+Seeds,Dried lentils,1.50,1.63,1.84,1.50,1.62,1.94,1.87,1.63,1.90
+Seeds,Cooked chickpeas,1.09,0.78,1.09,1.04,0.91,0.84,1.14,0.91,0.81
+Seeds,Dried white beans,1.67,2.26,2.07,2.23,2.17,2.02,2.36,1.89,2.03
+Starches,Potato,1.38,1.28,1.40,1.26,1.32,1.01,1.09,1.12,1.02
+Starches,Sweet potato,2.10,1.98,2.14,2.47,2.22,2.23,2.08,2.13,2.75
+Veggies,Onion,1.19,1.17,0.98,1.22,0.97,1.07,1.34,1.18,1.15
+Veggies,Carrot,1.15,1.21,1.19,0.96,0.87,0.99,0.97,0.95,1.26
+Veggies,Bell pepper,2.81,2.27,2.60,2.35,2.85,2.41,2.22,2.20,2.51
+Veggies,Mushroom,2.41,2.74,3.07,2.55,2.36,3.17,2.66,2.23,2.18
+Veggies,Cauliflower,1.64,2.03,2.16,1.88,1.61,1.85,2.32,1.96,2.30
+Veggies,Spinach,1.98,1.40,1.88,1.86,1.76,1.58,1.83,1.47,1.69
+Veggies,Green beans,2.80,3.36,3.28,2.59,2.86,2.50,3.32,3.27,2.63
+Veggies,Eggplant,1.99,1.97,1.63,2.08,1.92,2.09,1.91,1.52,1.76
+Fruit,Banana,1.28,1.85,1.82,1.79,1.46,1.31,1.82,1.86,1.32
+Fruit,Apple,1.98,1.65,2.19,2.20,1.70,1.97,2.03,1.81,2.28
+Fruit,Kiwi,2.72,2.49,2.85,3.06,2.48,2.60,3.35,2.97,2.74
+Fruit,Orange,1.69,1.43,1.50,1.58,1.74,1.50,1.50,1.40,1.77
+Avocado,Avocado,1.32,1.71,1.69,1.23,1.33,1.58,1.31,1.27,1.73
+Nuts,Almonds,9.96,9.59,10.77,10.86,8.51,8.16,9.43,9.40,9.56
+Nuts,Walnuts,9.12,8.93,9.95,7.05,8.04,7.84,9.55,7.54,7.35
+Nuts,Hazelnuts,10.09,9.99,9.41,9.29,12.01,10.07,11.76,10.51,8.49
+Meat,Pork loin,7.81,7.39,7.73,7.62,7.42,5.67,6.49,5.80,6.27
+Meat,Chicken breast,6.07,7.00,8.74,6.67,8.16,7.21,7.12,8.66,8.77
+Meat,Chicken thigh,5.11,5.43,4.32,4.60,5.92,5.15,5.08,5.48,4.13
+Yogurt,Plain natural yogurt,1.37,1.33,1.51,1.15,1.57,1.11,1.16,1.38,1.42
+Eggs,Eggs (up to 12),2.33,2.21,3.00,2.34,2.70,2.72,2.52,2.69,2.62
+Delivery,Shipping,4.90,7.21,3.50,4.50,5.95,6.90,5.50,4.95,3.90
+</script>
+    <script>
+      const EUR = new Intl.NumberFormat("en-IE", {
+        style: "currency",
+        currency: "EUR",
+      });
+
+      function parseCSV(text) {
+        const lines = text.trim().split(/\r?\n/);
+        const header = lines[0].split(",");
+        const stores = header.slice(2);
+        const rows = lines.slice(1).map((line) => {
+          const cells = line.split(",");
+          const prices = {};
+          stores.forEach((s, i) => {
+            const v = parseFloat(cells[2 + i]);
+            prices[s] = Number.isFinite(v) ? v : null;
+          });
+          return { category: cells[0], item: cells[1], prices };
+        });
+        return { stores, rows };
+      }
+
+      function groupByCategory({ stores, rows }) {
+        const map = new Map();
+        for (const row of rows) {
+          if (!map.has(row.category)) map.set(row.category, []);
+          map.get(row.category).push(row);
+        }
+        return [...map.entries()].map(([category, items]) => {
+          const totals = stores.map((store) => {
+            let sum = 0;
+            let missing = false;
+            for (const item of items) {
+              const p = item.prices[store];
+              if (p == null) missing = true;
+              else sum += p;
+            }
+            return { store, total: sum, missing };
+          });
+          totals.sort((a, b) => a.total - b.total);
+          return { category, items, totals };
+        });
+      }
+
+      function render(categories) {
+        const list = document.getElementById("list");
+        list.innerHTML = "";
+        for (const cat of categories) {
+          const best = cat.totals[0];
+          const el = document.createElement("section");
+          el.className = "category";
+          el.innerHTML = `
+            <div class="cat-header">
+              <span class="chevron">▶</span>
+              <span class="cat-name">${escapeHtml(cat.category)}</span>
+              <span class="cat-best">${escapeHtml(best.store)}</span>
+              <span class="cat-total">${EUR.format(best.total)}</span>
+            </div>
+            <div class="stores">
+              ${cat.totals
+                .map(
+                  (t, i) => `
+                    <div class="store-row${i === 0 ? " best" : ""}">
+                      <span class="rank">${i + 1}.</span>
+                      <span class="store-name">${escapeHtml(t.store)}</span>
+                      <span>${EUR.format(t.total)}</span>
+                    </div>`
+                )
+                .join("")}
+            </div>
+          `;
+          el.querySelector(".cat-header").addEventListener("click", () => {
+            el.classList.toggle("open");
+          });
+          list.appendChild(el);
+        }
+      }
+
+      function escapeHtml(s) {
+        return String(s).replace(/[&<>"']/g, (c) => ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;",
+        })[c]);
+      }
+
+      const data = parseCSV(document.getElementById("prices").textContent);
+      const categories = groupByCategory(data);
+      document.getElementById("sub").textContent =
+        `${categories.length} categories · ${data.stores.length} stores · tap a category to rank`;
+      render(categories);
+    </script>
+  </body>
+</html>

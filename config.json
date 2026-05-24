@@ -1,0 +1,49 @@
+{
+  "city": "Barcelona",
+  "stores": [
+    { "name": "Alcampo", "url": "https://www.compraonline.alcampo.es/" },
+    { "name": "Mercadona", "url": "https://tienda.mercadona.es/" },
+    { "name": "Dia", "url": "https://www.dia.es/" },
+    { "name": "Consum", "url": "https://tienda.consum.es/" },
+    {
+      "name": "Bonpreu Esclat",
+      "url": "https://www.compraonline.bonpreuesclat.cat/"
+    },
+    { "name": "Carrefour", "url": "https://www.carrefour.es/supermercado/" },
+    { "name": "Caprabo", "url": "https://www.capraboacasa.com/" },
+    { "name": "Condis", "url": "https://compraonline.condis.es/" },
+    {
+      "name": "Ametller Origen",
+      "url": "https://www.ametllerorigen.com/"
+    }
+  ],
+  "basket": [
+    { "category": "Seeds", "item": "Brown rice" },
+    { "category": "Seeds", "item": "Dried lentils" },
+    { "category": "Seeds", "item": "Cooked chickpeas" },
+    { "category": "Seeds", "item": "Dried white beans" },
+    { "category": "Starches", "item": "Potato" },
+    { "category": "Starches", "item": "Sweet potato" },
+    { "category": "Veggies", "item": "Onion" },
+    { "category": "Veggies", "item": "Carrot" },
+    { "category": "Veggies", "item": "Bell pepper" },
+    { "category": "Veggies", "item": "Mushroom" },
+    { "category": "Veggies", "item": "Cauliflower" },
+    { "category": "Veggies", "item": "Spinach" },
+    { "category": "Veggies", "item": "Green beans" },
+    { "category": "Veggies", "item": "Eggplant" },
+    { "category": "Fruit", "item": "Banana" },
+    { "category": "Fruit", "item": "Apple" },
+    { "category": "Fruit", "item": "Kiwi" },
+    { "category": "Fruit", "item": "Orange" },
+    { "category": "Avocado", "item": "Avocado" },
+    { "category": "Nuts", "item": "Almonds" },
+    { "category": "Nuts", "item": "Walnuts" },
+    { "category": "Nuts", "item": "Hazelnuts" },
+    { "category": "Meat", "item": "Pork loin" },
+    { "category": "Meat", "item": "Chicken breast" },
+    { "category": "Meat", "item": "Chicken thigh" },
+    { "category": "Yogurt", "item": "Plain natural yogurt" },
+    { "category": "Eggs", "item": "Eggs (up to 12)" }
+  ]
+}
