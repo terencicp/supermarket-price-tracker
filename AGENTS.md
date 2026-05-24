@@ -4,7 +4,7 @@ This project tracks the price of an online shopping basket across several superm
 
 ## Files
 
-- `config.json` — what to track: the list of stores and the fixed basket. The source of truth; changes only when the user asks.
+- `config.json` — what to track: the list of stores (name and url) and the fixed basket (foods and categories). The source of truth; changes only when the user asks.
 - `prices.csv` — the latest prices. Regenerated each month. The canonical price record (git history = price history). Columns: `category,item,<store1>,<store2>,…` — one row per basket item, one price column per store in `config.json` `stores` order. If `config.json` changes, the store columns must be regenerated to match.
 - `index.html` — a self-contained interactive page. Embeds the CSV in a `<script type="text/csv" id="prices">` block so it works by double-click (no server, no `fetch`). Renders the ranking.
 - `README.md` — human-readable summary of the latest run: search date, cheapest store overall, cheapest store per category, and any notable movers vs. the previous run. Overwritten each month.
