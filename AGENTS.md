@@ -15,7 +15,7 @@ This project tracks the price of an online shopping basket across several superm
 
 Once a month:
 
-1. Search current supermarket prices for the basket in `config.json`. For each `(item, store)`, record the price and the source product-page URL. Fan out sub-agents in parallel, batched by **product** (~6 items per agent), and run them on the **Haiku** model.
+1. Search current supermarket prices for the basket in `config.json`. For each `(item, store)`, record the price and the source product-page URL. Fan out sub-agents in parallel, batched by **product** (~6 items per agent).
 2. Write the latest prices to `prices.csv` (one row per item, one column per store — same shape as today).
 3. Replace the contents of the `#prices` `<script>` block in `index.html` with the same CSV. `prices.csv` and the inline copy must stay in lockstep — `prices.csv` is canonical, the inline copy is what the page actually reads.
 4. Rewrite `search-log.csv` with one row per `(item, store)`: search date, price, and the URL the agent actually used to obtain the price.
