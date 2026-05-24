@@ -1,21 +1,15 @@
 {
   "city": "Barcelona",
   "stores": [
-    { "name": "Alcampo", "url": "https://www.compraonline.alcampo.es/" },
-    { "name": "Mercadona", "url": "https://tienda.mercadona.es/" },
-    { "name": "Dia", "url": "https://www.dia.es/" },
-    { "name": "Consum", "url": "https://tienda.consum.es/" },
-    {
-      "name": "Bonpreu Esclat",
-      "url": "https://www.compraonline.bonpreuesclat.cat/"
-    },
-    { "name": "Carrefour", "url": "https://www.carrefour.es/supermercado/" },
-    { "name": "Caprabo", "url": "https://www.capraboacasa.com/" },
-    { "name": "Condis", "url": "https://compraonline.condis.es/" },
-    {
-      "name": "Ametller Origen",
-      "url": "https://www.ametllerorigen.com/"
-    }
+    { "name": "Alcampo" },
+    { "name": "Mercadona" },
+    { "name": "Dia" },
+    { "name": "Consum" },
+    { "name": "Bonpreu Esclat" },
+    { "name": "Carrefour" },
+    { "name": "Caprabo" },
+    { "name": "Condis" },
+    { "name": "Ametller Origen" }
   ],
   "basket": [
     { "category": "Seeds", "item": "Brown rice" },
