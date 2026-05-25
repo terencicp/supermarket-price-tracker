@@ -10,6 +10,7 @@ This project tracks the price of an online shopping basket across several superm
 - `README.md` — human-readable summary of the latest run: search date, cheapest store overall, cheapest store per category, and any notable movers vs. the previous run. Overwritten each month.
 - `search-log.csv` — audit log of the latest price lookup. Replaced each run, not appended. One row per `(item, store)` pair, with columns: `date,item,store,price,url`. The `url` MUST be the page the agent actually read the price from.
 - `category-avg.csv` — derived from `prices.csv`. One row per category with the mean item price for each store. Columns: `category,items,<store1>,<store2>,…` where `items` is the number of basket items in that category. Regenerated each month from `prices.csv` — never edit by hand.
+- `documentation/` — one markdown file per store describing how to fetch that store's prices: endpoint or scrape strategy, request shape, response shape, quirks, and a runnable example.
 
 ## The agent's job
 
@@ -24,6 +25,9 @@ Once a month:
 
 ## Search strategy
 
+Run a subagent for each store to find prices for each product in the basket. Follow the API described in the docs in `documentation/supermarket_name.md` for each supermarket. Stop and report if the documented API fails.
+
+Consider:
 - Units: calculate €/kg for everything, except eggs (€/dozen).
 - Pack size: ignore packs > 1 kg (or > 12 eggs).
 - Delivery postcode: 08001 (Barcelona).
