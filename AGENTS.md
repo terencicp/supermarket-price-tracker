@@ -8,7 +8,6 @@ This project tracks the price of an online shopping basket across several superm
 - `prices.csv` — the latest prices. Regenerated each month. The canonical price record (git history = price history). Columns: `category,item,<store1>,<store2>,…` — one row per basket item, one price column per store in `config.json` `stores` order. If `config.json` changes, the store columns must be regenerated to match.
 - `index.html` — a self-contained interactive page. Embeds the CSV in a `<script type="text/csv" id="prices">` block so it works by double-click (no server, no `fetch`). Renders the ranking.
 - `README.md` — human-readable summary of the latest run: search date, cheapest store overall, cheapest store per category, and any notable movers vs. the previous run. Overwritten each month.
-- `search-log.csv` — audit log of the latest price lookup. Replaced each run, not appended. One row per `(item, store)` pair, with columns: `date,item,store,price,url`. The `url` MUST be the page the agent actually read the price from.
 - `category-avg.csv` — derived from `prices.csv`. One row per category with the mean item price for each store. Columns: `category,items,<store1>,<store2>,…` where `items` is the number of basket items in that category. Regenerated each month from `prices.csv` — never edit by hand.
 - `documentation/` — one markdown file per store describing how to fetch that store's prices: endpoint or scrape strategy, request shape, response shape, quirks, and a runnable example.
 
