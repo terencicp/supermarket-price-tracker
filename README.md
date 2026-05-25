@@ -2,51 +2,54 @@
 
 Monthly price comparison of a fixed 27-item basket across 9 supermarkets that deliver to Barcelona (postcode 08001). Prices in €/kg (eggs in €/dozen). See [`AGENTS.md`](AGENTS.md) for the methodology and [`index.html`](index.html) for the interactive ranking.
 
-## Latest run — 2026-05-24
+## Latest run — 2026-05-26
 
-This is the **first real-data run** — prior commits contained placeholder dummy values.
+All 243 cells filled this month — no blanks for the first time. Comparison is on the full 27-item basket (sum of €/kg plus eggs in €/dozen).
 
 ### Cheapest store overall
 
-Comparing on the 18 items where every store had a price (i.e. excluding items any store didn't sell or surface):
-
-| # | Store           | 18-item basket |
+| # | Store           | 27-item basket |
 |---|-----------------|----------------|
-| 1 | **Consum**      | **€79.05**     |
-| 2 | Mercadona       | €80.34         |
-| 3 | Carrefour       | €92.07         |
-| 4 | Dia             | €92.52         |
-| 5 | Bonpreu Esclat  | €92.87         |
-| 6 | Alcampo         | €93.82         |
-| 7 | Condis          | €99.79         |
-| 8 | Caprabo         | €100.13        |
-| 9 | Ametller Origen | €112.89        |
+| 1 | **Alcampo**     | **€110.16**    |
+| 2 | Carrefour       | €113.13        |
+| 3 | Mercadona       | €115.70        |
+| 4 | Consum          | €117.56        |
+| 5 | Bonpreu Esclat  | €119.57        |
+| 6 | Dia             | €121.62        |
+| 7 | Caprabo         | €128.04        |
+| 8 | Condis          | €132.78        |
+| 9 | Ametller Origen | €139.87        |
 
-Consum and Mercadona are clearly the value leaders; Ametller Origen is the outlier on the expensive end (a premium fresh-produce chain — expected).
+(Last month's leaderboard was an 18-item subset because of gaps, so ranks aren't directly comparable. Still, the big move is Alcampo climbing from the middle of the pack to first.)
 
 ### Cheapest store per category
 
-Means computed from items the store actually stocks (€/kg, except Eggs €/dozen).
-
-| Category | Cheapest      | Avg €/kg | Notes |
-|----------|---------------|----------|-------|
-| Seeds    | Mercadona     | 1.89     | Hacendado store-brand dominates |
-| Starches | Alcampo       | 1.81     | Bonpreu lower at 1.22 but missing Sweet potato |
-| Veggies  | Condis        | 2.62     | Cheap onion, cauliflower, eggplant |
-| Fruit    | Carrefour     | 1.91     | Especially competitive on oranges & bananas |
-| Avocado  | Bonpreu       | 3.99     | |
-| Nuts     | Consum        | 8.78     | Granel (loose) selling crushes the packaged competition |
-| Meat     | Carrefour     | 4.52     | Chicken thigh at €2.79/kg is the standout |
-| Yogurt   | Mercadona / Caprabo | 1.33 | Tied (basic store-brand multipacks) |
-| Eggs     | Bonpreu       | 2.95 /dozen | |
+| Category | Cheapest        | Avg €/kg       | Notes |
+|----------|-----------------|----------------|-------|
+| Seeds    | Alcampo         | 1.72           | Cheapest on chickpeas (€1.63) and white beans (€1.79) |
+| Starches | Bonpreu Esclat  | 1.97           | 0.8 kg potato bag at €1.24/kg is the standout |
+| Veggies  | Bonpreu Esclat  | 2.38           | Frozen plain spinach (€2.23) and green beans (€1.80) carry it |
+| Fruit    | Alcampo         | 1.92           | Cheapest on apples (€1.44) and kiwis (€2.88) |
+| Avocado  | Dia             | 3.76           | 450 g tray €1.69 |
+| Nuts     | Carrefour       | 12.94          | In-shell walnuts (€6.14) help; Consum lost its hazelnut granel deal |
+| Meat     | Mercadona       | 5.27           | Sub-kg lomo trozo €4.95 and contramuslos sin piel €4.20 |
+| Yogurt   | Dia             | 1.32 /kg       | Yogur natural desnatado 6×125 g |
+| Eggs     | Alcampo         | 2.59 /dozen    | Auchan barn-housed M, 12 ud |
 
 ### Movers vs. last run
 
-No comparison — this is the first real run. Next month we'll see actual price drift.
+- **Hazelnuts shot up everywhere**: Consum €9.99 → €24.95 (granel option gone), Mercadona €16.25 → €21.50. No store under €19/kg.
+- **Onions**: huge spread opened up. Dia dropped to €1.00/kg (cheapest in dataset), Alcampo went the other way (€1.50 → €2.35).
+- **Spinach**: Alcampo dropped €7.97 → €1.67 (switched to a 750 g frozen bag), Bonpreu €4.30 → €2.23 (also frozen).
+- **Bananas**: Dia €1.59 → €1.19, Alcampo €2.37 → €1.48. The two Plátano-Canario-only stores (Consum, Caprabo) hold at €2.90.
+- **Carrefour sweet potato**: €2.79 → €5.90 (only eco SKU available this run; pushed Carrefour out of the Starches lead).
+- **Consum potato/orange**: previous granel deals (€1.04 / €1.45) were gone — now €1.90 / €1.95. Two of the main reasons Consum fell from 1st to 4th.
+- **Ametller plain yogurt**: €4.38 → €2.00 (an Essencials 4×125 g multipack appeared).
+- **Mercadona meat**: pork loin €6.30 → €4.95 (sub-kg trozo), chicken thigh €6.50 → €4.20 (sin piel) — earns Mercadona the meat category outright.
 
 ### Caveats
 
-- 9 of 243 cells are blank because the item wasn't found in that store's catalogue (or only as a non-comparable format like baby spinach 70 g, or stale cached SKU). See [`prices.csv`](prices.csv) for the gaps.
-- Some prices are derived from third-party trackers (`soysuper.com`, `mercastic.es`, `missupermercados.com`, `finditapp.es`, `tulistadelmerca.es`) because several supermarket sites (Alcampo, Carrefour, Caprabo, Condis, Bonpreu, Ametller) block automated requests on their product pages.
-- Cooked chickpeas: €/kg uses jar gross weight (drained is ~60%). All stores follow this convention so the comparison is fair.
-- Fresh items sold by piece with no posted €/kg (potato 5-kg bags, oranges in mesh, chicken trays) are converted from the smaller listed pack where possible; otherwise the per-kg derived from the only listed pack is used and noted in [`search-log.csv`](search-log.csv).
+- "Cheapest reasonable" within rules sometimes lands on a frozen SKU (Alcampo spinach, Bonpreu green beans, Caprabo cauliflower). Flagged in [`search-log.csv`](search-log.csv) via the product name.
+- Cooked chickpeas €/kg uses jar gross weight (drained ≈ 60 %). Convention is consistent across all stores.
+- Some "fresh produce by piece" prices come from the small per-kg figure listed on a single-unit page; mallas above 1 kg are skipped per the methodology even when they'd be cheaper per kg.
+- Pack-size rule (≤1 kg / ≤12 eggs) is applied strictly. One exception: Mercadona's coliflor is sold as a single ~1.04 kg head with no smaller option, kept in.
