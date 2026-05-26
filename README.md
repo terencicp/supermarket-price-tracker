@@ -15,10 +15,10 @@ All 243 cells filled. Carrefour takes 1st this run, edging Alcampo by €2.50 on
 | 3 | Consum          | €113.73        |
 | 4 | Mercadona       | €115.22        |
 | 5 | Dia             | €121.71        |
-| 6 | Bonpreu Esclat  | €127.21        |
+| 6 | Bonpreu  | €127.21        |
 | 7 | Caprabo         | €128.52        |
 | 8 | Condis          | €138.00        |
-| 9 | Ametller Origen | €138.48        |
+| 9 | Ametller | €138.48        |
 
 Last run: Alcampo €110.16, Carrefour €113.13, Mercadona €115.70, Consum €117.56, Bonpreu €119.57, Dia €121.62, Caprabo €128.04, Condis €132.78, Ametller €139.87.
 
@@ -27,7 +27,7 @@ Last run: Alcampo €110.16, Carrefour €113.13, Mercadona €115.70, Consum �
 | Category | Cheapest        | Avg €/kg       | Notes |
 |----------|-----------------|----------------|-------|
 | Seeds    | Alcampo         | 1.72           | Cheapest on chickpeas (€1.63) and white beans (€1.79) |
-| Starches | Bonpreu Esclat  | 1.96           | 0.8 kg potato bag at €1.24/kg holds the lead |
+| Starches | Bonpreu  | 1.96           | 0.8 kg potato bag at €1.24/kg holds the lead |
 | Veggies  | Mercadona       | 2.85           | Cheapest on onion fresh (€2.00), bell pepper (€2.10), green beans plana (€3.93) |
 | Fruit    | Alcampo         | 1.92           | Cheapest on apples (€1.44) and kiwis (€2.88) |
 | Avocado  | Dia             | 3.76           | 450 g tray €1.69 |
